@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 public class Person {
 
     public Person(PersonDTO data) {
-        this.name = data.name();
-        this.avatar = data.photoUrl();
+        this.username = data.username();
+        this.avatar = data.avatar();
     }
 
     @Id
@@ -25,7 +25,7 @@ public class Person {
     private Long id;
 
     @Column(length = 50, nullable = false)
-    private String name;
+    private String username;
 
     @Column(length = 200, nullable = false)
     private String avatar;
