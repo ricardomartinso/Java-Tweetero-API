@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tweteero.api.dto.PersonDTO;
 import com.tweteero.api.model.Person;
-import com.tweteero.api.repository.PersonRepository;
+import com.tweteero.api.services.PersonService;
 
 import jakarta.validation.Valid;
 
@@ -23,30 +23,26 @@ import jakarta.validation.Valid;
 public class PersonControllers {
 
     @Autowired
-    private PersonRepository repository;
+    private PersonService service;
 
     @GetMapping
     public List<Person> listAll() {
-        return repository.findAll();
+        return service.findAll();
     }
 
     @PostMapping("/sign-up")
     public void create(@RequestBody @Valid PersonDTO req) {
-        repository.save(new Person(req));
 
+        service.save(req);
     }
 
     @PutMapping("/{id}")
     public void update(@PathVariable Long id, @RequestBody @Valid PersonDTO req) {
-        repository.findById(id).map(person -> {
-            person.setUsername(req.username());
-            person.setAvatar(req.avatar());
-            return repository.save(person);
-        });
+        service.update(id, req);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        repository.deleteById(id);
+        service.delete(id);
     }
 }
