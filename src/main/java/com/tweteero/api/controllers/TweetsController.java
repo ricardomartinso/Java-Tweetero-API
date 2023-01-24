@@ -23,6 +23,8 @@ import com.tweteero.api.dto.TweetDTO;
 import com.tweteero.api.model.Tweet;
 import com.tweteero.api.services.TweetService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping
 @CrossOrigin(origins = "*")
@@ -45,8 +47,8 @@ public class TweetsController {
     }
 
     @PostMapping("/tweets")
-    public void createTweet(@RequestHeader("User") String username, @RequestBody TweetDTO req) {
-        service.save(username, req);
+    public void createTweet(@RequestBody @Valid TweetDTO req) {
+        service.save(req.username(), req);
     }
 
 }
