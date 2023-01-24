@@ -26,10 +26,10 @@ public class TweetService {
     @Autowired
     private PersonRepository personRepository;
 
-    public void save(String username, TweetDTO tweet) {
+    public void save(TweetDTO tweet) {
 
-        Optional<Person> person = personRepository.findByUsername(username);
-        System.out.println(person);
+        Optional<Person> person = personRepository.findByUsername(tweet.username());
+
         if (person.isPresent()) {
             repository.save(new Tweet(tweet, person.get().getUsername(), person.get().getAvatar()));
         }

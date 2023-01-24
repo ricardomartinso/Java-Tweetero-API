@@ -48,7 +48,7 @@ public class TweetsController {
 
     @PostMapping("/tweets")
     public void createTweet(@RequestBody @Valid TweetDTO req) {
-        service.save(req.username(), req);
+        service.save(req);
     }
 
 }

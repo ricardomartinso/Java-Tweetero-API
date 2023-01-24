@@ -27,7 +27,7 @@ public class PersonControllers {
     @Autowired
     private PersonService service;
 
-    @GetMapping
+    @GetMapping("/users")
     public List<Person> listAll() {
         return service.findAll();
     }
